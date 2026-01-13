@@ -11,14 +11,11 @@
 		"gpt-oss:latest": {
           "name": "gpt-oss"
         },
-        "deepseek-r1:latest": {
-		  "name": "deepseek-r1"
+        "MFDoom/deepseek-r1-tool-calling:latest": {
+		  "name": "deepseek-r1-doom"
 		},
         "qwen2.5-coder:32b": {
           "name": "qwen2.5-coder"
-        },
-        "qwen3-coder:30b": {
-          "name": "qwen3-coder"
         },
         "qwen3:30b": {
           "name": "qwen3"
@@ -26,5 +23,5 @@
       }
     }
   },
-  "enabled_providers": ["ollama"]
+  "enabled_providers": ["ollama", "gemini"]
 }

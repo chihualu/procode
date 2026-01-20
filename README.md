@@ -42,4 +42,4 @@ docker run -it --rm ghcr.io/chihualu/procode:latest --help
 
 ## 授權條款 (License)
 
-本專案採用 MIT License 授權 - 詳細內容請參閱 [LICENSE](LICENSE) 檔案。
+本專案採用 Apache License 2.0 授權 - 詳細內容請參閱 [LICENSE](LICENSE) 檔案。

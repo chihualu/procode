@@ -10,6 +10,10 @@ RUN npm install -g @vybestack/llxprt-code
 # Create configuration directory
 RUN mkdir -p /root/.llxprt
 
+# Set terminal environment variables for correct color display
+ENV TERM=xterm-256color
+ENV FORCE_COLOR=3
+
 # Copy configuration files
 COPY settings.json /root/.llxprt/settings.json
 COPY welcomeConfig.json /root/.llxprt/welcomeConfig.json

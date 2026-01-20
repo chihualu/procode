@@ -14,6 +14,8 @@ RUN mkdir -p /root/.llxprt
 COPY settings.json /root/.llxprt/settings.json
 COPY welcomeConfig.json /root/.llxprt/welcomeConfig.json
 COPY profiles/ /root/.llxprt/profiles/
+RUN mkdir -p /root/.llxprt/prompts/providers/openai/
+COPY core.md /root/.llxprt/prompts/providers/openai/core.md
 
 # Create working directory
 WORKDIR /workspace

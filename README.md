@@ -1,56 +1,60 @@
-# OpenCode Docker Image
+# OpenCode Docker 映像檔
 
 ![GitHub Actions Workflow Status](https://github.com/chihualu/opencode/actions/workflows/publish.yml/badge.svg)
 ![License](https://img.shields.io/github/license/chihualu/opencode)
 
-This project provides a customized Docker image for **OpenCode**, extending the official `ghcr.io/anomalyco/opencode` image. It pre-configures the environment with a custom `opencode.json` suitable for connecting to OpenAI-compatible APIs (like vLLM).
+本專案提供了一個客製化的 **OpenCode** Docker 映像檔，延伸自官方的 `ghcr.io/anomalyco/opencode`。它預先配置了 `opencode.json`，方便您直接連接支援 OpenAI 協定的 API 服務（例如 vLLM）。
 
-## Features
+## 功能特色
 
-*   **Base Image**: Built on top of `ghcr.io/anomalyco/opencode:latest`.
-*   **Pre-configured**: Includes `opencode.json` injected into `/etc/opencode/`.
-*   **Environment Ready**: configured to use `API_BASEURL` and `API_KEY` environment variables for flexible deployment.
+*   **基底映像檔**: 建構於 `ghcr.io/anomalyco/opencode:latest` 之上。
+*   **預先配置**: 將 `opencode.json` 內建於 `/etc/opencode/` 目錄中。
+*   **環境變數支援**: 可透過 `API_BASEURL` 和 `API_KEY` 環境變數彈性設定連線資訊。
 
-## Getting Started
+## 快速開始
 
-### Prerequisites
+### 事前準備
 
-*   Docker installed on your machine.
-*   Access to an OpenAI-compatible API endpoint (e.g., vLLM, Ollama, etc.).
+*   您的機器上已安裝 Docker。
+*   擁有一個相容 OpenAI 協定的 API 端點（例如 vLLM, Ollama 等）。
 
-### Usage
+### 使用說明
 
-You can pull the pre-built image from the GitHub Container Registry:
+您可以直接從 GitHub Container Registry 下載已建置好的映像檔：
 
 ```bash
 docker pull ghcr.io/chihualu/opencode:latest
 ```
 
-### Running the Container
+### 啟動容器 (Server 模式)
 
-To run the container, you must provide the `API_BASEURL` and `API_KEY` environment variables.
+使用以下指令以背景服務方式 (`-d`) 啟動容器，並命名為 `opencode`：
 
 ```bash
-docker run -it --rm \
+docker run --name opencode -d \
   -p 3000:3000 \
   -e API_BASEURL="https://your-api-endpoint.com/v1" \
   -e API_KEY="your-secret-api-key" \
   ghcr.io/chihualu/opencode:latest
 ```
 
-*   **`-p 3000:3000`**: Maps port 3000 of the container to port 3000 on your host.
-*   **`-e API_BASEURL`**: The base URL of your LLM provider.
-*   **`-e API_KEY`**: Your API key for the LLM provider.
+**參數說明：**
 
-## Configuration
+*   **`--name opencode`**: 將容器命名為 `opencode`，方便後續管理。
+*   **`-d`**: 在背景執行容器 (Detached mode)。
+*   **`-p 3000:3000`**: 將容器的 3000 Port 對應到主機的 3000 Port。
+*   **`-e API_BASEURL`**: 您的 LLM 服務網址 (Base URL)。
+*   **`-e API_KEY`**: 您的 API 金鑰。
 
-The image uses a custom `opencode.json` located at `/etc/opencode/opencode.json`.
-The application is configured to look for this file via the `OPENCODE_CONFIG` environment variable.
+## 設定檔說明
 
-### Default Provider
-*   **Provider**: `vllm` (via `@ai-sdk/openai-compatible`)
+此映像檔使用位於 `/etc/opencode/opencode.json` 的設定檔。
+系統已透過 `OPENCODE_CONFIG` 環境變數指定此路徑，啟動時會自動載入。
+
+### 預設 Provider 設定
+*   **Provider**: `vllm` (透過 `@ai-sdk/openai-compatible`)
 *   **Default Model**: `gpt-oss`
 
-## License
+## 授權條款 (License)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+本專案採用 MIT License 授權 - 詳細內容請參閱 [LICENSE](LICENSE) 檔案。
